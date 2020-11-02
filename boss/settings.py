@@ -14,7 +14,7 @@ SECRET_KEY = 'im6)!2apu_m6nd*qyf9hti!64%ur9b&d!u)7j+we2_)5%g!vg!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -39,7 +39,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':('knox.auth.TokenAuthentication',)
 }
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
