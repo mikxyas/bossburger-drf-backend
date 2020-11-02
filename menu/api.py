@@ -19,3 +19,10 @@ class MenuItemViewSet(viewsets.ModelViewSet):
         IsAdminUserOrReadOnly
     ]
     serializer_class = MenuItemSerializer
+
+# class Open_ClosedViewSet(viewsets.ModelViewSet):
+#     queryset = Open_Closed.objects.all()
+#     permission_classes = [
+#         permissions.AllowAny
+#     ]
+#     serializer_class = Open_ClosedSerializer

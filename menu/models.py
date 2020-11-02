@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class MenuItem(models.Model):
@@ -21,4 +22,11 @@ class MenuItem(models.Model):
     )
     def __str__(self):
         return str(self.name)
-        
+
+# class Open_Closed(models.Model):
+#     open = models.BooleanField(default=True)
+#     def save(self, *args, **kwargs):
+#         state = Open_Closed.objects.all()
+#         if not self.pk and Open_Closed.objects.exists():
+#             raise ValidationError('There is can be only one JuicerBaseSettings instance')
+#         return super(Open_Closed, self).save(*args, **kwargs)

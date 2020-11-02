@@ -5,4 +5,4 @@ from location.models import Location
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = '__all__'
+        fields = ['order', 'time_of_order', 'time_of_delivery', 'delivered', 'customer', 'customer_location']
