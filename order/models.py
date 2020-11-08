@@ -10,6 +10,17 @@ class Order(models.Model):
     delivered = models.BooleanField(default=False)
     customer = models.ForeignKey(User, related_name='customer', on_delete=models.CASCADE, null=True)
     customer_location = models.ForeignKey(Location, related_name='location', on_delete=models.CASCADE, null=True)
+    PICKUP = 'PCK'
+    DELIVERY = 'DVY'
+    order_type_choices = [
+        (PICKUP, 'Pickup'),
+        (DELIVERY, 'Delivery'),
+    ] 
+    order_type = models.CharField(
+        max_length=3, choices=order_type_choices, default=DELIVERY
+    )
+    quantities = models.JSONField()
+    customer_phone = models.CharField(max_length=15, default='+251')
     def __str__(self):
         return str(self.customer)
         
