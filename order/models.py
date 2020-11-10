@@ -7,6 +7,7 @@ class Order(models.Model):
     order = models.ManyToManyField(MenuItem)
     time_of_order = models.DateTimeField(auto_now_add=True)
     time_of_delivery = models.TimeField(null=True)
+    total_price = models.IntegerField(default=0)
     delivered = models.BooleanField(default=False)
     customer = models.ForeignKey(User, related_name='customer', on_delete=models.CASCADE, null=True)
     customer_location = models.ForeignKey(Location, related_name='location', on_delete=models.CASCADE, null=True)
