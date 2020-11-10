@@ -13,3 +13,12 @@ class LocationViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(locCreator=self.request.user)
+
+class AdminLocViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAdminUser
+    ]
+    serializer_class = LocationSerializer
+
+    def get_queryset(self):
+        return Location.objects.all()

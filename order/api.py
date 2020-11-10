@@ -15,4 +15,12 @@ class OrderViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         return serializer.save(customer=self.request.user)
-   
+
+class AdminOrderViewSet(viewsets.ModelViewSet):
+    permission_classes = [
+        permissions.IsAdminUser
+    ]
+    serializer_class = OrderSerializer
+
+    def get_queryset(self):
+        return Order.objects.filter(delivered=False)
