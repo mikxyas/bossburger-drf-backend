@@ -13,6 +13,15 @@ class UserAPI(generics.RetrieveAPIView):
     def get_object(self):
         return self.request.user
 
+class UserAdminAPI(generics.ListAPIView):
+    permission_classes = [
+        permissions.IsAdminUser
+    ]
+    serializer_class = UserSerializer
+
+    def get_queryset(self):
+        return User.objects.all()
+
 # Register API
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
