@@ -40,4 +40,5 @@ class AdminAllOrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
 
     def get_queryset(self):
-        return Order.objects.get.all()
+        orders = Order.objects.all()
+        return orders
