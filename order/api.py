@@ -15,7 +15,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         return self.request.user.customer.all()
     
     def perform_create(self, serializer):
-        user = self.request.user
+        user = User.objects.get(id=self.request.user)
         return serializer.save(customer=user)
 class AdminOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
