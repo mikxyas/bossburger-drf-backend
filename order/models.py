@@ -10,8 +10,8 @@ class Order(models.Model):
     Food_price = models.IntegerField(default=0)
     delivery_price = models.IntegerField(default=0)
     delivered = models.BooleanField(default=False)
-    customer = models.ForeignKey(User, related_name='customer', on_delete=models.CASCADE, null=True)
-    customer_location = models.ForeignKey(Location, related_name='location', on_delete=models.CASCADE, null=True)
+    customer = models.ManyToManyField(User)
+    customer_location = models.ManyToManyField(Location)
     PICKUP = 'PCK'
     DELIVERY = 'DVY'
     order_type_choices = [

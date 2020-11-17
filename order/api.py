@@ -2,7 +2,7 @@ from rest_framework import viewsets, generics,permissions
 from .serializers import OrderSerializer
 from .models import Order
 from rest_framework.response import Response
-
+from accounts.models import User 
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -14,7 +14,8 @@ class OrderViewSet(viewsets.ModelViewSet):
         return self.request.user.customer.all()
     
     def perform_create(self, serializer):
-        return serializer.save(customer=self.request.user)
+        user = User.objects.get(id=self.request.user.id)
+        return serializer.save(customer=user)
 
 class AdminOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
