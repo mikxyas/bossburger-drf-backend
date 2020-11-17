@@ -23,7 +23,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         menuItems = []
         for i in menuItemId:
             menuItem = MenuItem.objects.get(id=i)
-            menuItems.append(menuItem)
+            menuItems[i].append(menuItem)
         # menuItems = MenuItem.objects.filter(id=menuItemId)
         user = User.objects.get(id=self.request.user.id)
         location = self.request.data.get('customer_location')
