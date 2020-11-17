@@ -3,6 +3,7 @@ from .serializers import OrderSerializer
 from .models import Order
 from rest_framework.response import Response
 from accounts.models import User 
+from accounts.serializers import UserSerializer 
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -13,10 +14,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         return self.request.user.customer.all()
     
-    def perform_create(self, serializer):
-        user = User.objects.get(id=self.request.user.id)
-        return serializer.save(customer=user)
-
+    def perform_create(self):
+        pass
 class AdminOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAdminUser
