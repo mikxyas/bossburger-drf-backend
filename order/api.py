@@ -13,7 +13,9 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
     
     def get_queryset(self):
-        return self.request.user.customer.all()
+        user = self.request.user.id
+        orders =  Order.objects.filter(customer=user)
+        return orders
     
     def perform_create(self, serializer):
         user = User.objects.get(id=self.request.user.id)
