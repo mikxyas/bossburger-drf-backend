@@ -20,10 +20,14 @@ class OrderViewSet(viewsets.ModelViewSet):
     
     def perform_create(self, serializer):
         menuItemId = self.request.data.get('order')
-        menuItems = MenuItem.objects.get(id__in=menuItemId)
+        menuItems = []
+        for i in menuItemId:
+            menuItem = MenuItem.objects.get(id=i)
+            menuItems.append(menuItem)
+        # menuItems = MenuItem.objects.filter(id=menuItemId)
         user = User.objects.get(id=self.request.user.id)
         location = self.request.data.get('customer_location')
-        return serializer.save(customer={user}, customer_location={location}, order={menuItems})
+        return serializer.save(customer={user}, customer_location={location}, order=menuItems)
 class AdminOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
         permissions.IsAdminUser
