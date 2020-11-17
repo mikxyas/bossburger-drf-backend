@@ -24,8 +24,5 @@ class Order(models.Model):
     quantities = models.JSONField()
     customer_phone = models.CharField(max_length=15, default='+251')
     def __str__(self):
-        return str(order_type)
-        # user = self.request.user.id
-        # username = User.objects.get(id=user)
-        # return str(username.name)
+        return str(self.order_type)
         
