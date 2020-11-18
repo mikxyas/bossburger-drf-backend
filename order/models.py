@@ -6,7 +6,8 @@ from menu.models import MenuItem
 class Order(models.Model):
     order = models.ManyToManyField(MenuItem)
     time_of_order = models.DateTimeField(auto_now_add=True)
-    time_of_delivery = models.TimeField(null=True)
+    # time_of_delivery = models.TimeField(null=True)
+    time_delivered = models.DateTimeField(auto_now_add=True)
     Food_price = models.IntegerField(default=0)
     delivery_price = models.IntegerField(default=0)
     delivered = models.BooleanField(default=False)
