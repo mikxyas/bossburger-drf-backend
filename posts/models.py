@@ -4,6 +4,7 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=255)
     img = models.URLField()
+    post_pic = models.ImageField(null=True, blank=True)
     desc = models.CharField(max_length=500)
     GIVEAWAY = 'GA'
     OFFER = 'OF'
