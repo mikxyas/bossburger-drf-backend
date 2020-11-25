@@ -5,7 +5,7 @@ def upload_path(instance, filename):
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    img = models.URLField()
+    img = models.CharField(max_length=200)
     post_pic = models.ImageField(null=True, blank=True, upload_to=upload_path)
     desc = models.CharField(max_length=500)
     GIVEAWAY = 'GA'

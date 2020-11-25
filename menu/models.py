@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 class MenuItem(models.Model):
     name = models.CharField(default='Name',max_length=100)
     price = models.IntegerField(default=0)
-    img = models.URLField(max_length=100, default='https://bit.ly/2G85fwJ')
+    img = models.CharField(max_length=200, default='https://bit.ly/2G85fwJ')
     food_pic = models.ImageField(null=True, blank=True)
     available = models.BooleanField(default=True)
     BURGER = 'BRG'
