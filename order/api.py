@@ -6,6 +6,17 @@ from accounts.models import User
 from accounts.serializers import UserSerializer 
 from location.models import Location
 from menu.models import MenuItem
+from rest_framework.permissions import IsAdminUser,SAFE_METHODS
+
+class IsAdminUserOrReadOnly(IsAdminUser):
+
+    def has_permission(self, request, view):
+        is_admin = super(
+            IsAdminUserOrReadOnly, 
+            self).has_permission(request, view)
+        # Python3: is_admin = super().has_permission(request, view)
+        return request.method in SAFE_METHODS or is_admin
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
@@ -31,7 +42,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         return serializer.save(customer={user}, customer_location={location}, order=menuItems)
 class AdminOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
-        permissions.IsAdminUser
+        IsAdminUserOrReadOnly
     ]
     serializer_class = OrderSerializer
 
@@ -40,7 +51,7 @@ class AdminOrderViewSet(viewsets.ModelViewSet):
 
 class AdminAllOrderViewSet(viewsets.ModelViewSet):
     permission_classes = [
-        permissions.IsAdminUser
+        IsAdminUserOrReadOnly
     ]
     serializer_class = OrderSerializer
 

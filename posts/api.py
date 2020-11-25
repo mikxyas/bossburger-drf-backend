@@ -19,3 +19,13 @@ class PostViewSet(viewsets.ModelViewSet):
         IsAdminUserOrReadOnly
     ]
     serializer_class = PostSerializer
+
+    def post(self, request, *args, **kwargs):
+        title = request.data['title']
+        img = request.data['img']
+        post_pic = request.data['post_pic']
+        desc = request.data['desc']
+        post_type = request.data['post_type']
+        content = request.data['content']
+        Post.objects.create(title=title, img=img,post_pic=post_pic,desc=desc,post_type=post_type,content=content)
+        return HttpResponse({'message': 'Post Created'},status=200)

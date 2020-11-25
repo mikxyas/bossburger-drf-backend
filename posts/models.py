@@ -1,10 +1,12 @@
 from django.db import models
 
+def upload_path(instance, filename):
+    return '/'.join(['posts', str(instance.title), filename])
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=255)
     img = models.URLField()
-    post_pic = models.ImageField(null=True, blank=True)
+    post_pic = models.ImageField(null=True, blank=True, upload_to=upload_path)
     desc = models.CharField(max_length=500)
     GIVEAWAY = 'GA'
     OFFER = 'OF'
