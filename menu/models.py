@@ -8,6 +8,7 @@ class MenuItem(models.Model):
     img = models.CharField(max_length=200, default='https://bit.ly/2G85fwJ')
     food_pic = models.ImageField(null=True, blank=True)
     available = models.BooleanField(default=True)
+    rating = models.JSONField(null=True, blank=True)
     BURGER = 'BRG'
     FRIES = 'FRI'
     EXTRA = 'EXT'
