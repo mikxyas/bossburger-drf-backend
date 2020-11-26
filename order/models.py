@@ -12,7 +12,7 @@ class Order(models.Model):
     delivery_price = models.IntegerField(default=0)
     delivered = models.BooleanField(default=False)
     customer = models.ManyToManyField(User)
-    customer_location = models.ManyToManyField(Location)
+    customer_location = models.ManyToManyField(Location,  blank=True)
     PICKUP = 'PCK'
     DELIVERY = 'DVY'
     order_type_choices = [
