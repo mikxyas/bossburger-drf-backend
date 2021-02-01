@@ -50,7 +50,7 @@ class LoginSerializer(serializers.Serializer):
             'email': user.email,
             'phone_number':user.phone_number,
             'name':user.name,
-            'primary_lod_id':user.primary_lod_id,
+            'primary_lod_id':user.primary_loc_id,
             'prevOrdType':user.prevOrdType,
             'is_admin':user.is_admin,
             'token':user.token()
