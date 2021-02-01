@@ -9,7 +9,7 @@ from knox.models import AuthToken
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('__all__')
+        fields = ('id', 'name', 'phone_number', 'email', 'primary_loc_id', 'prevOrdType','is_admin')
         read_only_fields = ('email',)
 
 class RegisterSerializer(serializers.ModelSerializer):
