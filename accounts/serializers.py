@@ -9,7 +9,7 @@ from knox.models import AuthToken
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','email','name','phone_number','created_at','is_admin')
+        fields = '__all__'
         read_only_fields = ('email',)
 
 class RegisterSerializer(serializers.ModelSerializer):
@@ -50,6 +50,8 @@ class LoginSerializer(serializers.Serializer):
             'email': user.email,
             'phone_number':user.phone_number,
             'name':user.name,
+            'primary_lod_id':user.primary_lod_id,
+            'prevOrdType':user.prevOrdType,
             'token':user.token()
         }
         return super().validate(attrs)
