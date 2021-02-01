@@ -37,13 +37,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100)
     created_at = models.DateField(default=datetime.date.today)
     phone_number = models.CharField(max_length=12, default='+251')
+    primary_loc_id = models.IntegerField()
+    prevOrdType = models.CharField(max_length=200, default='Delivery')
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = [ 'phone_number','name']
-
     objects = UserManager()
 
     def __str__(self):              

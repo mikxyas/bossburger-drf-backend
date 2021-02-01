@@ -14,6 +14,7 @@ class Order(models.Model):
     customer = models.ManyToManyField(User)
     customer_location = models.ManyToManyField(Location,  blank=True)
     PICKUP = 'PCK'
+    pickup_time = models.CharField(max_length=200, default='none')
     DELIVERY = 'DVY'
     order_type_choices = [
         (PICKUP, 'Pickup'),
