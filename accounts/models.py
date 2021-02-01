@@ -38,7 +38,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     created_at = models.DateField(default=datetime.date.today)
     phone_number = models.CharField(max_length=12, default='+251')
     primary_loc_id = models.IntegerField()
-    prevOrdType = models.CharField(max_length=200, default='Delivery')
+    prevOrdType = models.CharField(max_length=200, default='none')
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
