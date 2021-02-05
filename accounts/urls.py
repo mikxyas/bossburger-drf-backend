@@ -1,13 +1,14 @@
 from django.urls import path, include
-from .api import RegisterAPI, LoginAPI, UserAPI, UserAdminAPI
-from knox import views as knox_views
+# from .api import RegisterAPI, LoginAPI, UserAPI, UserAdminAPI
+from rest_framework import routers
+from .api import RegisterViewSet
 
+router = routers.DefaultRouter()
+router.register('api/auth/register', RegisterViewSet, 'register')
 
 urlpatterns = [
-    path('api/auth', include('knox.urls')),
-    path('api/auth/register', RegisterAPI.as_view()),
-    path('api/auth/login', LoginAPI.as_view()),
-    path('api/auth/user', UserAPI.as_view()),
-    path('api/admin/auth/users', UserAdminAPI.as_view())
-
+    path('api/auth/', include('rest_auth.urls')),
+    path('api/auth/user/', include('allauth.urls'), name='get user'),
 ]
+
+urlpatterns += router.urls

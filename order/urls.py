@@ -1,7 +1,7 @@
 from django.urls import path, include
 from rest_framework import routers
 from .api import OrderViewSet, AdminOrderViewSet, AdminAllOrderViewSet
-from knox import views as knox_views
+# from knox import views as knox_views
 
 router = routers.DefaultRouter()
 router.register('api/order', OrderViewSet, 'orders')

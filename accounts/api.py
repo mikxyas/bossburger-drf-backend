@@ -1,47 +1,18 @@
+from rest_framework import viewsets, permissions
 from .models import User
-from rest_framework import viewsets, generics,permissions
-from rest_framework.response import Response
-from knox.models import AuthToken
-from .serializers import RegisterSerializer, LoginSerializer,UserSerializer
+from .serializers import RegisterSerializer
 
-
-class UserAPI(generics.RetrieveAPIView):
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
-    serializer_class = UserSerializer 
-    def get_object(self):
-        return self.request.user
-
-class UserAdminAPI(generics.ListAPIView):
-    permission_classes = [
-        permissions.IsAdminUser
-    ]
-    serializer_class = UserSerializer
-
-    def get_queryset(self):
-        return User.objects.all()
-
-# Register API
-class RegisterAPI(generics.GenericAPIView):
+class RegisterViewSet(viewsets.ModelViewSet):
     serializer_class = RegisterSerializer
+    queryset = User.objects.all()
+    
     def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data) 
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        return Response({
-            "user":UserSerializer(user, context=self.get_serializer_context()).data,
-            "token":AuthToken.objects.create(user)[1]
-        })
-
-# Login Api
-
-class LoginAPI(generics.GenericAPIView):
-    serializer_class = LoginSerializer
-    def post(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data) 
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data
-        # sr_user = UserSerializer(user, context=self.get_serializer_context()).data 
-        # token = AuthToken.objects.get_or_create(user=sr_user['pk'])
-        return Response(user)
+        if user:
+             return Response({
+                "user": UserSerializer(user,
+                context=self.get_serializer_context()).data
+            })
+        return Response

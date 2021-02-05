@@ -1,12 +1,9 @@
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager, PermissionsMixin
 from django.db import models
 import datetime
-from knox.models import AuthToken
 
 class UserManager(BaseUserManager):
-
     use_in_migrations = True
-
     def create_user(self, email,phone_number,name,password=None):
         user = self.model(
             email=self.normalize_email(email),
@@ -37,7 +34,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     name = models.CharField(max_length=100)
     created_at = models.DateField(default=datetime.date.today)
     phone_number = models.CharField(max_length=12, default='+251')
-    primary_loc_id = models.IntegerField()
+    primary_loc_id = models.IntegerField(default=0)
     prevOrdType = models.CharField(max_length=200, default='none')
     is_staff = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
@@ -50,11 +47,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):              
         return self.email
     
-    def token(self):
-        token = AuthToken.objects.create(self)
-        print(token[1])
-        # if(not token):
-            # token = AuthToken.objects.get(user=self)
-        return (token[1])
+    # def token(self):
+    #     token = AuthToken.objects.create(self)
+    #     print(token[1])
+    #     # if(not token):
+    #         # token = AuthToken.objects.get(user=self)
+    #     return (token[1])
 
     # def get_token(self):
