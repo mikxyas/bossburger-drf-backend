@@ -48,7 +48,11 @@ REST_AUTH_SERIALIZERS = {
 #     'REGISTER_SERIALIZER':'accounts.serializers.RegisterSerializer'
 
 # }
-
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework.authentication.TokenAuthentication',
+   ),
+}
 # REST_FRAMEWORK = {
 #     'DEFAULT_AUTHENTICATION_CLASSES':('knox.auth.TokenAuthentication',)
 # }
