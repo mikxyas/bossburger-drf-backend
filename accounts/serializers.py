@@ -3,8 +3,7 @@ from .models import User
 from django.contrib.auth import authenticate
 from django.contrib import auth
 from rest_framework.exceptions import AuthenticationFailed
-
-
+from rest_framework.authtoken.models import Token
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -15,7 +14,8 @@ class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(max_length=68, min_length=6, write_only=True)
     class Meta:
         model = User
-        fields = ('id','email','password', 'phone_number','name')
+        fields = ('id','email','password', 'phone_number','name','primary_loc_id','prevOrdType','is_admin')
+
     def validate(self, attrs):
         email = attrs.get('email', '') 
 
@@ -26,7 +26,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
-
+    
 # class LoginSerializer(serializers.Serializer):
 #     email = serializers.EmailField(max_length=255, min_length=3) 
 #     password = serializers.CharField(
