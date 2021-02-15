@@ -17,4 +17,4 @@ class Post(models.Model):
         (EVENT, 'Event'),
     ]
     post_type = models.CharField(max_length=3, choices=post_type_choices, default=GIVEAWAY)
-    content = models.CharField(max_length=1000, null=True)
+    content = models.CharField(max_length=1000, blank=True,null=True)
